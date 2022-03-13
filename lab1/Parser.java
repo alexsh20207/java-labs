@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public class Parser {
     static private final int badValue = -1;
+    static private final char symNewLine = '\n';
 
     private Reader reader;
     private Container container;
@@ -25,7 +26,7 @@ public class Parser {
                 err.printStackTrace();
                 return;
             }
-            if (sym != badValue) {
+            if (sym != badValue && sym != symNewLine) {
                 if (Character.isLetterOrDigit((char)sym)) {
                     word.append((char)sym);
                 }
