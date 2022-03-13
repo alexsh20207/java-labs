@@ -11,6 +11,7 @@ public class Main {
     static private final int inputArg = 0;
     static private final int outputArg = 1;
     static private final int wordCountInit = 0;
+    static private final String emptyErr = "Input is empty";
 
     public static void main(String[] args) {
         if (args.length != argCount) {
@@ -22,6 +23,10 @@ public class Main {
             Container container = new Container();
             Parser parser = new Parser(reader, container, wordCountInit);
             parser.work();
+            if (container.getWordCount() == 0) {
+                System.out.print(emptyErr);
+                return;
+            }
             Writer writer = new Writer(args[outputArg], container);
             writer.work();
             writer.close();
