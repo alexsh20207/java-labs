@@ -17,8 +17,13 @@ public class Container {
         if (words.containsKey(word)) words.put(word, words.get(word) + countStep);
         else {
             words.put(word, wordCountInit);
+<<<<<<< HEAD
         }
         wordCount++;
+=======
+            wordCount++;
+        }
+>>>>>>> d63d4e49efbec1221f18fb3faadf30629a9afabb
     }
 
     public int getWordCount() {

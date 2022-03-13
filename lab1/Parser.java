@@ -8,7 +8,11 @@ public class Parser {
     private Reader reader;
     private Container container;
 
+<<<<<<< HEAD
     public Parser(Reader reader, Container container, int wordCount) {
+=======
+    public Parser(Reader reader, Container container) {
+>>>>>>> d63d4e49efbec1221f18fb3faadf30629a9afabb
         this.reader = reader;
         this.container = container;
     }

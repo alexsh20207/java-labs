@@ -22,9 +22,15 @@ public class Writer {
         List<Map.Entry<String, Integer>> words = wordCont.sort();
         int wordCount = wordCont.getWordCount();
         for (int i = words.size() - extraUnit; i >= forInit; i--) {
+<<<<<<< HEAD
             String thisWordCount = words.get(i).getValue().toString();
             String freq = ((Double)(((double)words.get(i).getValue() / wordCount) * oneHundred)).toString();
             fileWriter.write(words.get(i).getKey() + ";" + thisWordCount + ";" + freq + '\n');
+=======
+            String wordcount = words.get(i).getValue().toString();
+            String freq = ((Double)(((double)words.get(i).getValue() / wordCount) * oneHundred)).toString();
+            fileWriter.write(words.get(i).getKey() + ";" + wordCount + ";" + freq + '\n');
+>>>>>>> d63d4e49efbec1221f18fb3faadf30629a9afabb
         }
     }
     public void close() throws IOException {
