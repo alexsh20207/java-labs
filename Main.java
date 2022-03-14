@@ -6,28 +6,28 @@ import lab1.Writer;
 import java.io.IOException;
 
 public class Main {
-    static private final int argCount = 2;
-    static private final String argErr = "Wrong args";
-    static private final int inputArg = 0;
-    static private final int outputArg = 1;
-    static private final int wordCountInit = 0;
-    static private final String emptyErr = "Input is empty";
+    static private final int ARG_COUNT = 2;
+    static private final String ARG_ERR = "Wrong args";
+    static private final int INPUT_ART = 0;
+    static private final int OUTPUT_ARG = 1;
+    static private final int WORD_COUNT_INIT = 0;
+    static private final String EMPTY_ERR = "Input is empty";
 
     public static void main(String[] args) {
-        if (args.length != argCount) {
-            System.out.print(argErr);
+        if (args.length != ARG_COUNT) {
+            System.out.print(ARG_ERR);
             return;
         }
         try {
-            Reader reader = new Reader(args[inputArg]);
+            Reader reader = new Reader(args[INPUT_ARG]);
             Container container = new Container();
-            Parser parser = new Parser(reader, container, wordCountInit);
+            Parser parser = new Parser(reader, container, WORD_COUNT_INIT);
             parser.work();
-            if (container.getWordCount() == 0) {
-                System.out.print(emptyErr);
+            if (container.getWordCount() == WORD_COUNT_INIT) {
+                System.out.print(EMPTY_ERR);
                 return;
             }
-            Writer writer = new Writer(args[outputArg], container);
+            Writer writer = new Writer(args[OUTPUT_ARG], container);
             writer.work();
             writer.close();
             reader.close();
