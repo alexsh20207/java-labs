@@ -29,12 +29,19 @@ public class Main {
             }
             Writer writer = new Writer(args[outputArg], container);
             writer.work();
-            writer.close();
-            reader.close();
         } catch (IOException err) {
             System.out.print(err.getMessage());
-            err.printStackTrace();
-            return;
         }
+        finally {
+            if (null != reader) {
+                try {
+                    reader.close();
+                }
+                catch(IOException err) {
+                    err.printStackTrace();
+                }
+            }
+        }
+
     }
 }
