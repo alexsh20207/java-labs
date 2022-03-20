@@ -1,41 +1,34 @@
-package lab1;
-
+package ru.nsu.oop.shtang.lab1;
 import java.io.IOException;
 
 public class Parser {
-    static private final int badValue = -1;
-    static private final char symNewLine = '\n';
+    static private final int BAD_VALUE = -1;
+    static private final String EMPTY_STRING = "";
+    static private final int WORD_LENGTH_INIT = 0;
 
     private Reader reader;
     private Container container;
 
-    public Parser(Reader reader, Container container, int wordCount) {
+    public Parser(Reader reader, Container container) {
         this.reader = reader;
         this.container = container;
     }
 
-    public void work() {
+    public void work() throws IOException {
         StringBuilder word = new StringBuilder();
         while (true) {
             int sym;
-            try {
-                sym = reader.getSym();
-            }
-            catch (IOException err) {
-                System.out.print(err.getMessage());
-                err.printStackTrace();
-                return;
-            }
-            if (sym != badValue && sym != symNewLine) {
+            sym = reader.getSym();
+            if (sym != BAD_VALUE) {
                 if (Character.isLetterOrDigit((char)sym)) {
                     word.append((char)sym);
                 }
-                else {
+                else if (word.toString() != EMPTY_STRING){
                     container.addWord(word.toString());
-                    word.delete(0, word.length());
+                    word.delete(WORD_LENGTH_INIT, word.length());
                 }
             } else {
-                if (!word.isEmpty()) {
+                if  ((word.toString() != EMPTY_STRING)) {
                     container.addWord(word.toString());
                 }
                 break;
