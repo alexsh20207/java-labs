@@ -1,4 +1,4 @@
-package lab1;
+package ru.nsu.oop.shtang.lab1;
 import java.io.*;
 import java.lang.StringBuilder;
 
