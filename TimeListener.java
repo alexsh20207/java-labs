@@ -6,11 +6,9 @@ import java.awt.event.ActionListener;
 public class TimeListener implements ActionListener {
     static private final int SECOND = 1;
 
-    GameModel gameModel = new GameModel();
-
     public void actionPerformed(ActionEvent e) {
-        if (gameModel.getIsSthOpen() == true && gameModel.isPlaying() == true) {
-            gameModel.setTimeCounter(gameModel.getTimeCounter() + SECOND);
+        if (GameModel.getIsSthOpen() == true && GameModel.isPlaying() == true) {
+            GameModel.setTimeCounter(GameModel.getTimeCounter() + SECOND);
         }
     }
 }

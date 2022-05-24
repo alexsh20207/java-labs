@@ -15,9 +15,6 @@ public final class Const {
     final static String ABOUT_TEXT = "About";
     final static String HS_TEXT = "High Scores";
     final static String EXIT_TEXT = "Exit";
-    final static int LVL_EASY_NUM = 1;
-    final static int LVL_NORMAL_NUM = 2;
-    final static int LVL_HARD_NUM = 3;
     final static int LVL_EASY_X_CELLS = 9;
     final static int LVL_EASY_Y_CELLS = 9;
     final static int LVL_EASY_MINES = 10;
@@ -31,16 +28,14 @@ public final class Const {
     final static int OFFSET_Y = 113;
 
     final static int CELL_SIZE = 32;
-
-    final static String FONT_NAME = "System";
     final static String NEW_LINE = "\n";
-
-    final static int INIT_CLICK_COUNTER = 0;
+    final static int INIT_STEP_AMOUNT = 0;
     final static int INIT_TIME_COUNTER = 0;
     final static int INIT_SCORE = 0;
-
     final static int TIMER_DELAY = 1000;
     final static int FIRST_CELL_NUM = 0;
     final static int EMPTY_CELL = 0;
     final static int WRONG_FLAG_CELL = 40;
+    final static String PATH_FILE_HS = "src/main/java/resources/hs.txt";
+
 }

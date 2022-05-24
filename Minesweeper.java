@@ -1,19 +1,22 @@
 package rus.nsu.fit.oop.ms;
 
 import rus.nsu.fit.oop.ms.gui.GView;
+import rus.nsu.fit.oop.ms.gui.WindowAbout;
+import rus.nsu.fit.oop.ms.gui.WindowHS;
+import rus.nsu.fit.oop.ms.text.TextController;
 import rus.nsu.fit.oop.ms.text.TextView;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import static rus.nsu.fit.oop.ms.Const.*;
 
 public class Minesweeper extends JFrame {
+
+    private final TextController textController = new TextController();
+
     public Minesweeper() throws IOException {
-        GameModel gm = new GameModel();
-        gm.newGame();
+        GameModel.newGame();
         initUI();
     }
 
@@ -21,131 +24,88 @@ public class Minesweeper extends JFrame {
         add(new GView());
         setResizable(false);
         pack();
+        createMenu();
+        setVisible(true);
         setTitle(TITLE_NAME);
         setLocationRelativeTo(null);
-        setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        createMenu();
+        textController.work();
+        gameExit();
     }
 
     private void createMenu() {
         JRootPane rootPane = new JRootPane();
-        GameModel gameModel = new GameModel();
         JMenuBar menuBar = new JMenuBar();
 
         JMenu menuLvl = new JMenu(LVL_TEXT);
-        JMenuItem menuLvlEasy = new JMenuItem(LVL_EASY_TEXT);
-        menuLvlEasy.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (gameModel.getLvlNum() != LVL_EASY_NUM) {
-                    gameModel.setSize(LVL_EASY_X_CELLS, LVL_EASY_Y_CELLS);
-                    gameModel.setMinesCount(LVL_EASY_MINES);
-                    gameModel.setLvlNum(LVL_EASY_NUM);
-                    gameModel.newGame();
-                    TextView textView = new TextView();
-                    try {
-                        textView.print();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                    setSize(new Dimension(gameModel.getXCells() * CELL_SIZE + OFFSET_X,
-                            gameModel.getYCells() * CELL_SIZE + OFFSET_Y));
-                }
-            }
-        });
-        menuLvl.add(menuLvlEasy);
-        JMenuItem menuLvlNormal = new JMenuItem(LVL_NORMAL_TEXT);
-        menuLvlNormal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (gameModel.getLvlNum() != LVL_NORMAL_NUM) {
-                    gameModel.setSize(LVL_NORMAL_X_CELLS, LVL_NORMAL_Y_CELLS);
-                    gameModel.setMinesCount(LVL_NORMAL_MINES);
-                    gameModel.setLvlNum(LVL_NORMAL_NUM);
-                    gameModel.newGame();
-                    TextView textView = new TextView();
-                    try {
-                        textView.print();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                    setSize(new Dimension(gameModel.getXCells() * CELL_SIZE + OFFSET_X,
-                            gameModel.getYCells() * CELL_SIZE + OFFSET_Y));
-                }
-            }
-        });
-        menuLvl.add(menuLvlNormal);
-        JMenuItem menuLvlHard = new JMenuItem(LVL_HARD_TEXT);
-        menuLvlHard.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (gameModel.getLvlNum() != LVL_HARD_NUM) {
-                    gameModel.setSize(LVL_HARD_X_CELLS, LVL_HARD_Y_CELLS);
-                    gameModel.setMinesCount(LVL_HARD_MINES);
-                    gameModel.setLvlNum(LVL_HARD_NUM);
-                    gameModel.newGame();
-                    TextView textView = new TextView();
-                    try {
-                        textView.print();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                    setSize(new Dimension(gameModel.getXCells() * CELL_SIZE + OFFSET_X,
-                            gameModel.getYCells() * CELL_SIZE + OFFSET_Y));
-                }
-            }
-        });
-        menuLvl.add(menuLvlHard);
+        menuLvl.add(createLvlMenu(LVL_EASY_TEXT, LVL_EASY_X_CELLS, LVL_EASY_Y_CELLS, LVL_EASY_MINES));
+        menuLvl.add(createLvlMenu(LVL_NORMAL_TEXT, LVL_NORMAL_X_CELLS, LVL_NORMAL_Y_CELLS, LVL_NORMAL_MINES));
+        menuLvl.add(createLvlMenu(LVL_HARD_TEXT, LVL_HARD_X_CELLS, LVL_HARD_Y_CELLS, LVL_HARD_MINES));
         menuBar.add(menuLvl);
-        JMenuItem menuNG = new JMenuItem(NEW_GAME_TEXT);
-        menuNG.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameModel.newGame();
-                TextView textView = new TextView();
-                try {
-                    textView.print();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        menuBar.add(menuNG);
 
-        JMenuItem menuHS = new JMenuItem(HS_TEXT);
-        menuHS.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    WindowHS whs = new WindowHS();
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        menuBar.add(menuHS);
+        menuBar.add(createMenuNG());
+        menuBar.add(createMenuHS());
+        menuBar.add(createMenuAbout());
+        menuBar.add(createMenuExit());
 
-        JMenuItem menuAbout = new JMenuItem(ABOUT_TEXT);
-        menuAbout.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                WindowAbout wa = new WindowAbout();
-            }
-        });
-        menuBar.add(menuAbout);
-
-        JMenuItem menuExit = new JMenuItem(EXIT_TEXT);
-        menuExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        menuBar.add(menuExit);
         rootPane.setJMenuBar(menuBar);
         add(rootPane, BorderLayout.BEFORE_FIRST_LINE);
+    }
+
+    private JMenuItem createMenuExit() {
+        JMenuItem menuExit = new JMenuItem(EXIT_TEXT);
+        menuExit.addActionListener(e -> gameExit());
+        return menuExit;
+    }
+
+    private void gameExit() {
+        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
+
+
+    private JMenuItem createMenuAbout() {
+        JMenuItem menuAbout = new JMenuItem(ABOUT_TEXT);
+        menuAbout.addActionListener(e -> {
+            WindowAbout wa = new WindowAbout();
+        });
+        return menuAbout;
+    }
+
+    private JMenuItem createMenuHS() {
+        JMenuItem menuHS = new JMenuItem(HS_TEXT);
+        menuHS.addActionListener(e -> {
+            try {
+                WindowHS whs = new WindowHS();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        return menuHS;
+    }
+
+    private JMenuItem createMenuNG() {
+        JMenuItem menuNG = new JMenuItem(NEW_GAME_TEXT);
+        menuNG.addActionListener(e -> {
+            GameModel.newGame();
+            TextView textView = new TextView();
+            try {
+                textView.print();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        return menuNG;
+    }
+
+    private void changeFieldInfo(int newXCells, int newYCells, int newMinesAmount) {
+        GameModel.changeField(newXCells, newYCells, newMinesAmount);
+        setSize(new Dimension(GameModel.getXCells() * CELL_SIZE + OFFSET_X,
+                GameModel.getYCells() * CELL_SIZE + OFFSET_Y));
+    }
+
+    private JMenuItem createLvlMenu(String name, int xCells, int yCells, int minesAmount) {
+        JMenuItem menuLvl = new JMenuItem(name);
+        menuLvl.addActionListener(e -> changeFieldInfo(xCells, yCells, minesAmount));
+        return menuLvl;
     }
 }
