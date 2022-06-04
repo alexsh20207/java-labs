@@ -1,7 +1,6 @@
 package rus.nsu.fit.oop.lab2.Commands;
 import rus.nsu.fit.oop.lab2.Executor.ExecutionContext;
 import java.util.List;
-
 public class Add extends ExecCommand {
     @Override
     public void execute(ExecutionContext context, List<String> inputArgs) {
@@ -9,4 +8,5 @@ public class Add extends ExecCommand {
         double b = context.getStack().pop();
         context.getStack().push(a + b);
     }
+
 }

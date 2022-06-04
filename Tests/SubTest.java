@@ -13,7 +13,7 @@ class SubTest {
         context.getStack().push(5.0);
         context.getStack().push(89.2);
         ExecCommand sub = new Sub();
-        sub.execute(context, null);
+        sub.execute(context,null);
         assertEquals(84.2, context.getStack().peek(), 0.0);
     }
 }

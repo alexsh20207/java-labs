@@ -9,7 +9,6 @@ public class ExecutionContext {
     public Stack<Double> getStack() {
         return stack;
     }
-
     public HashMap<String, Double> getDefines() {
         return defines;
     }

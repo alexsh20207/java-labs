@@ -12,7 +12,7 @@ class SqrtTest {
         ExecutionContext context = new ExecutionContext();
         context.getStack().push(0.81);
         ExecCommand sqrt = new Sqrt();
-        sqrt.execute(context, null);
+        sqrt.execute(context,null);
         assertEquals(0.9, context.getStack().peek(), 0.0);
     }
 }

@@ -13,7 +13,7 @@ class MultTest {
         context.getStack().push(2.);
         context.getStack().push(-3.);
         ExecCommand multiplication = new Mult();
-        multiplication.execute(context, null);
+        multiplication.execute(context,null);
         assertEquals(-6., context.getStack().peek(), 0.0);
     }
 }

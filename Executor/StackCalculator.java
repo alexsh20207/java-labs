@@ -1,6 +1,6 @@
 package rus.nsu.fit.oop.lab2.Executor;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import rus.nsu.fit.oop.lab2.Commands.ExecCommand;
-import rus.nsu.fit.oop.lab2.Exceptions.BuildCommandException;
 import rus.nsu.fit.oop.lab2.Exceptions.CommandNotFoundException;
 import rus.nsu.fit.oop.lab2.Factory.CommandFactory;
 import rus.nsu.fit.oop.lab2.Validator.Validator;
@@ -9,8 +9,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
+import static rus.nsu.fit.oop.lab2.Const.*;
+
 public class StackCalculator {
-    private BufferedReader reader = null;
+    private final BufferedReader reader;
+
     public StackCalculator(String inputStreamName) throws FileNotFoundException {
         if (inputStreamName == null) {
             reader = new BufferedReader(new InputStreamReader(System.in));
@@ -19,27 +22,28 @@ public class StackCalculator {
         }
     }
 
-    public void calculate() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        String line;
+    public void calculate() {
         ExecutionContext context = new ExecutionContext();
-        List<String> inputArgs;
+        String line;
         try {
             while (((line = reader.readLine()) != null)) {
-                if (line.startsWith("#")) continue;
-                String[] commandLine = line.split("\\s+");
-                ExecCommand nextCommand = CommandFactory.getInstance().buildCommand(commandLine[0]);
-                inputArgs = Arrays.asList(commandLine).subList(1, commandLine.length);
-                if (Validator.getInstance().validate(nextCommand, context, inputArgs)) {
-                    nextCommand.execute(context, inputArgs);
+                List<String> inputArgs;
+                String[] commandLine = line.split(SPACES);
+
+                ClassPathXmlApplicationContext xmlApplicationContext = new ClassPathXmlApplicationContext(XML_APP_CONF_FILE);
+                CommandFactory commandFactory = xmlApplicationContext.getBean(BEAN_FABRIC_NAME, CommandFactory.class);
+                ExecCommand execCommand = commandFactory.buildCommand(commandLine[FIRST_ARG]);
+
+                inputArgs = Arrays.asList(commandLine).subList(SECOND_ARG, commandLine.length);
+                Validator validator = new Validator(execCommand, context, inputArgs);
+
+                if (validator.validate()) {
+                    execCommand.execute(context, inputArgs);
                 } else {
-                    System.err.println(Validator.getInstance().getErrMsg());
+                    System.err.println(validator.getErrMsg());
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (CommandNotFoundException e) {
-            e.printStackTrace();
-        } catch (BuildCommandException e) {
+        } catch (IOException | CommandNotFoundException | ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }

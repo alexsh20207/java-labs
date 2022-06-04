@@ -14,7 +14,7 @@ class PrintTest {
         context.getStack().push(1.);
         context.getStack().push(2.);
         ExecCommand print = new Print();
-        print.execute(context, null);
+        print.execute(context,null);
         assertEquals(2., context.getStack().peek(), 0.0);
     }
 }

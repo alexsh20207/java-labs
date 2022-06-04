@@ -13,7 +13,7 @@ class DivTest {
         context.getStack().push(-2.0);
         context.getStack().push(5.0);
         ExecCommand div = new Div();
-        div.execute(context, null);
+        div.execute(context,null);
         assertEquals(-2.5, context.getStack().peek(), 0.0);
     }
 }
