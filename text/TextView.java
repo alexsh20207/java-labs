@@ -50,7 +50,7 @@ public class TextView {
         }
     }
 
-    public void plsHelp() {
+    public void printHelp() {
         printMsg(NEW_GAME_CMD_NAME, NEW_GAME_CMD_ARG_COUNT, NEW_GAME_DESC);
         printMsg(PRINT_CMD_NAME, PRINT_CMD_ARG_COUNT, PRINT_CMD_DESC);
         printMsg(EXIT_CMD_NAME, EXIT_CMD_ARG_COUNT, EXIT_DESC);
@@ -62,11 +62,11 @@ public class TextView {
     }
 
     public void printMsg(String commandName, int argAmount, String instruction) {
-        System.out.println(commandName + "(" + argAmount + ") - " + instruction);
+        System.out.println(commandName + BRACKET_LEFT + argAmount + BRACKET_RIGHT + instruction);
     }
 
     public void printHS() throws IOException {
-        FileReader fr = new FileReader(PATH1 + FILE_HS);
+        FileReader fr = new FileReader(FILE_HS);
         BufferedReader reader = new BufferedReader(fr);
         int counter = 0;
         String line;

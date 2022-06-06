@@ -19,8 +19,7 @@ public class ConstText {
     final static String TAB_SYM = "\t";
     final static String SPACE = " ";
 
-    final static String PATH1 = "src/main/java/resources/";
-    final static String FILE_HS = "hs.txt";
+    final static String FILE_HS = "src/main/java/hs.txt";
 
     final static String MSG_NOTHING = "There's nothing yet..";
     final static String DASH_TEXT = " - ";
@@ -69,5 +68,7 @@ public class ConstText {
 
     final static int ONE = 1;
 
-    final static String ABOUT_TEXT = "idk what to write here LMAO";
+    final static String ABOUT_TEXT = "Minesweeper. Bombeznaya igra";
+    final static String BRACKET_RIGHT = ") - ";
+    final static String BRACKET_LEFT = "(";
 }

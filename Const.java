@@ -36,6 +36,6 @@ public final class Const {
     final static int FIRST_CELL_NUM = 0;
     final static int EMPTY_CELL = 0;
     final static int WRONG_FLAG_CELL = 40;
-    final static String PATH_FILE_HS = "src/main/java/resources/hs.txt";
+    final static String PATH_FILE_HS = "src/main/java/hs.txt";
 
 }

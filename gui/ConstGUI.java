@@ -24,6 +24,6 @@ public final class ConstGUI {
     final static int DRAW_CLOSED_CELL = 10;
     final static int DRAW_FLAG = 11;
     final static int DRAW_WRONG_FLAG = 12;
-    final static String FILE_HS = "hs.txt";
+    final static String FILE_HS = "src/main/java/hs.txt";
     final static String FILE_ABOUT = "about.png";
 }

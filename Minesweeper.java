@@ -66,7 +66,9 @@ public class Minesweeper extends JFrame {
     private JMenuItem createMenuAbout() {
         JMenuItem menuAbout = new JMenuItem(ABOUT_TEXT);
         menuAbout.addActionListener(e -> {
-            WindowAbout wa = new WindowAbout();
+            WindowAbout windowAbout = new WindowAbout();
+            TextView textView = new TextView();
+            textView.printAbout();
         });
         return menuAbout;
     }
@@ -76,6 +78,8 @@ public class Minesweeper extends JFrame {
         menuHS.addActionListener(e -> {
             try {
                 WindowHS whs = new WindowHS();
+                TextView textView = new TextView();
+                textView.printHS();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

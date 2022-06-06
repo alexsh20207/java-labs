@@ -67,7 +67,7 @@ public class TextController {
             case PRINT_CMD_NAME -> textView.print();
             case ABOUT_CMD_NAME -> textView.printAbout();
             case HS_CMD_NAME -> textView.printHS();
-            case HELP_CMD_NAME -> textView.plsHelp();
+            case HELP_CMD_NAME -> textView.printHelp();
             case OPEN_CMD_NAME -> openCell(Integer.parseInt(commandLine[FIRST_ARG]),
                     Integer.parseInt(commandLine[SECOND_ARG]));
             case FLAG_CMD_NAME -> putFlag(Integer.parseInt(commandLine[FIRST_ARG]),

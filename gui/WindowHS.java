@@ -33,7 +33,7 @@ public class WindowHS {
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        FileReader fr = new FileReader(PATH1 + FILE_HS);
+        FileReader fr = new FileReader(FILE_HS);
         BufferedReader reader = new BufferedReader(fr);
         JLabel text = new JLabel(HTML_START);
         text.setFont(new Font(FONT_NAME, Font.PLAIN, FONT_SIZE));
